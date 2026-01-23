@@ -13,9 +13,9 @@ export const env = {
   MONGODB_URI: process.env.MONGODB_URI,
   MONGODB_DB: process.env.MONGODB_DB || "taskmanager",
 
-  // Email Configuration
-  SMTP_HOST: process.env.SMTP_HOST || "smtp.gmail.com",
-  SMTP_PORT: parseInt(process.env.SMTP_PORT || "587", 10),
+  // Email Configuration (Brevo SMTP)
+  SMTP_HOST: process.env.SMTP_HOST,
+  SMTP_PORT: process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : undefined,
   SMTP_SECURE: process.env.SMTP_SECURE === "true",
   SMTP_USER: process.env.SMTP_USER,
   SMTP_PASS: process.env.SMTP_PASS,
@@ -32,7 +32,7 @@ export const env = {
 };
 
 // Validate required env vars
-const requiredVars = ["JWT_SECRET", "MONGODB_URI", "SMTP_USER", "SMTP_PASS", "FROM_EMAIL"];
+const requiredVars = ["JWT_SECRET", "MONGODB_URI", "SMTP_HOST", "SMTP_PORT", "SMTP_USER", "SMTP_PASS", "FROM_EMAIL"];
 
 for (const varName of requiredVars) {
   if (!process.env[varName]) {

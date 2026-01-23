@@ -14,10 +14,26 @@ class EmailService {
   private transporter: nodemailer.Transporter;
 
   constructor() {
+    // Ensure proper type conversion for Brevo SMTP compatibility
+    // Nodemailer requires strict types: port must be Number, secure must be Boolean
+    const smtpPort = Number(env.SMTP_PORT);
+    const smtpSecure = Boolean(env.SMTP_SECURE);
+
+    if (!env.SMTP_HOST) {
+      throw new Error("SMTP_HOST environment variable is required");
+    }
+    if (!env.SMTP_PORT || isNaN(smtpPort)) {
+      throw new Error("SMTP_PORT environment variable must be a valid number");
+    }
+    if (!env.SMTP_USER || !env.SMTP_PASS) {
+      throw new Error("SMTP_USER and SMTP_PASS environment variables are required");
+    }
+
+    // Brevo SMTP configuration - no 'service' field, only host and port
     this.transporter = nodemailer.createTransport({
       host: env.SMTP_HOST,
-      port: env.SMTP_PORT,
-      secure: env.SMTP_SECURE, // true for 465, false for other ports
+      port: smtpPort,
+      secure: smtpSecure,
       auth: {
         user: env.SMTP_USER,
         pass: env.SMTP_PASS,
