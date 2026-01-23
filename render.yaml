@@ -33,7 +33,9 @@ services:
       - key: JWT_REFRESH_EXPIRES_IN
         value: 30d
       - key: FRONTEND_URL
-        value: https://your-frontend.onrender.com # hoặc domain thực tế
+        value: https://task-manager-zeta-snowy-24.vercel.app
+      - key: CORS_ORIGIN
+        value: https://task-manager-zeta-snowy-24.vercel.app
       - key: SMTP_HOST
         value: smtp-relay.brevo.com
       - key: SMTP_PORT

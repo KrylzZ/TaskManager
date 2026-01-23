@@ -22,10 +22,31 @@ export const createApp = async () => {
   await connectMongo();
   const app = express();
 
-  // Middlewares
+  // Middlewares - CORS Configuration
+  // Support both CORS_ORIGIN and FRONTEND_URL for flexibility
+  // CORS_ORIGIN can be a single URL or comma-separated URLs for multiple origins
+  const corsOrigin = process.env.CORS_ORIGIN || process.env.FRONTEND_URL || "http://localhost:5173";
+  const allowedOrigins = corsOrigin.split(",").map((origin) => origin.trim());
+  
+  // Log CORS configuration for debugging
+  logger.info(`CORS Configuration - Allowed origins: ${allowedOrigins.join(", ")}`);
+  logger.info(`CORS_ORIGIN env: ${process.env.CORS_ORIGIN || "not set"}`);
+  logger.info(`FRONTEND_URL env: ${process.env.FRONTEND_URL || "not set"}`);
+  
   app.use(
     cors({
-      origin: process.env.FRONTEND_URL || "http://localhost:5173",
+      origin: (origin, callback) => {
+        // Allow requests with no origin (like mobile apps or curl requests)
+        if (!origin) return callback(null, true);
+        
+        // Check if origin is in allowed list
+        if (allowedOrigins.includes(origin)) {
+          callback(null, true);
+        } else {
+          logger.warn(`CORS blocked origin: ${origin}. Allowed origins: ${allowedOrigins.join(", ")}`);
+          callback(new Error("Not allowed by CORS"));
+        }
+      },
       credentials: true,
     }),
   );

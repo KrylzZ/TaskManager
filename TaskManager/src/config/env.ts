@@ -29,6 +29,7 @@ export const env = {
   // Application URLs
   APP_URL: process.env.APP_URL || "http://localhost:3000",
   FRONTEND_URL: process.env.FRONTEND_URL || "http://localhost:5173",
+  CORS_ORIGIN: process.env.CORS_ORIGIN || process.env.FRONTEND_URL || "http://localhost:5173",
 };
 
 // Validate required env vars
