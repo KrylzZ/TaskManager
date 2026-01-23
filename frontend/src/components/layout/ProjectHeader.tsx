@@ -1,13 +1,11 @@
 import { NavLink } from "react-router-dom";
 import type { IProject } from "../../types/project";
-import { useAuthStore } from "../../stores/authStore";
 
 interface ProjectHeaderProps {
   project: IProject;
 }
 
 export default function ProjectHeader({ project }: ProjectHeaderProps) {
-  const { user } = useAuthStore();
 
   const showBacklog = project.type === "scrum";
 

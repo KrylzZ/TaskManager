@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useParams, Outlet } from "react-router-dom";
 import { useProjectStore } from "../stores/projectStore";
-import ProjectLayout from "../layouts/ProjectLayout";
 
 export default function ProjectLayoutWrapper() {
   const { projectId } = useParams<{ projectId: string }>();
@@ -21,13 +20,5 @@ export default function ProjectLayoutWrapper() {
     );
   }
 
-  return (
-    <ProjectLayout
-      projectName={currentProject.name}
-      projectCode={currentProject.key}
-      breadcrumb={[{ label: "Projects", path: "/projects" }, { label: currentProject.name }]}
-    >
-      <Outlet />
-    </ProjectLayout>
-  );
+  return <Outlet />;
 }

@@ -4,15 +4,13 @@ import { useParams, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { projects } from "../apis/project";
 import { useProjectStore } from "../stores/projectStore";
-import { useAuthStore } from "../stores/authStore";
 import { extractErrorMessage } from "../types/api";
-import { Loader2, Users, Calendar, CheckCircle, AlertCircle } from "lucide-react";
+import { Loader2, Users, CheckCircle, AlertCircle } from "lucide-react";
 
 export default function ProjectOverviewPage() {
   const { projectId } = useParams<{ projectId: string }>();
   const navigate = useNavigate();
   const { currentProject, fetchProject } = useProjectStore();
-  const { user } = useAuthStore();
   const [isLoading, setIsLoading] = useState(true);
   const [isJoining, setIsJoining] = useState(false);
   const [stats, setStats] = useState<{

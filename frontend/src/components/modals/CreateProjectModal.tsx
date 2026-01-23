@@ -124,14 +124,14 @@ const CreateProjectModal = ({ isOpen, onClose, isEditing = false, initialProject
         } else {
           // Note: ownerId is set by backend from req.user.userId, so we don't send it
           // console.log("🟢 [handleFormSubmit] Calling createProject from store...");
-          const result = await createProject({
+          await createProject({
             name: data.name,
             key: data.key,
             description: data.description || null,
             access: data.access,
             type: data.type,
           });
-          // console.log("🟢 [handleFormSubmit] Project created successfully:", result);
+          // console.log("🟢 [handleFormSubmit] Project created successfully");
           toast.success("Project created successfully!");
           // Refresh projects list after creation
           // console.log("🟢 [handleFormSubmit] Refreshing projects list...");
@@ -152,9 +152,9 @@ const CreateProjectModal = ({ isOpen, onClose, isEditing = false, initialProject
         setIsLoading(false);
       }
     },
-    (errors) => {
+    (_errors) => {
       // Validation errors callback
-      // console.log("❌ Validation Errors:", errors);
+      // console.log("❌ Validation Errors:", _errors);
     }
   );
 

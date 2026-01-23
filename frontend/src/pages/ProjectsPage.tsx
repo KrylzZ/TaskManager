@@ -46,7 +46,7 @@ export default function ProjectsPage() {
           updatedAt: typeof inv.updatedAt === "string" ? inv.updatedAt : new Date(inv.updatedAt).toISOString(),
           user: inv.user
             ? {
-                _id: inv.user._id || inv.user.id || inv.userId,
+                _id: inv.user._id || inv.userId,
                 email: inv.user.email || "",
                 firstName: inv.user.firstName || "",
                 lastName: inv.user.lastName || "",

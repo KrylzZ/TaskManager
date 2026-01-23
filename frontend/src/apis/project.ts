@@ -6,8 +6,7 @@ import {
   type CreateColumnProjectParams,
   type UpdateColumnProjectParams,
 } from "../types/project";
-import type { ProjectMember } from "../types"; // ✅ Import từ index.ts
-import type { IProjectMember } from "../types/projectMember";
+import type { ProjectMember } from "../types/projectMember";
 
 const config = {
   withCredentials: true,
@@ -134,5 +133,5 @@ export const projects = {
 
   // Get pending invitations for current user
   getPendingInvitations: () =>
-    api.get<ResponseApi<IProjectMember[]>>(`/projects/my-invitations`, config),
+    api.get<ResponseApi<ProjectMember[]>>(`/projects/my-invitations`, config),
 };

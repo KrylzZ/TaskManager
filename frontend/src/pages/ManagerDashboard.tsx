@@ -3,7 +3,6 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useProjectStore } from "../stores/projectStore";
 import { issues } from "../apis/issue";
-import type { IIssue } from "../types/issue";
 
 type TopContributor = {
   name: string;

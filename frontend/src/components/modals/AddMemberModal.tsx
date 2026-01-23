@@ -8,7 +8,7 @@ import { extractErrorMessage } from "../../types/api";
 import { Search, UserPlus, Loader2 } from "lucide-react";
 import { useProjectStore } from "../../stores/projectStore";
 import { useAuthStore } from "../../stores/authStore";
-import type { IProjectMember } from "../../types/projectMember";
+import type { ProjectMember } from "../../types/projectMember";
 
 interface AddMemberModalProps {
   isOpen: boolean;
@@ -31,7 +31,7 @@ const AddMemberModal = ({ isOpen, onClose, projectId, onSuccess }: AddMemberModa
   const [searchResults, setSearchResults] = useState<SearchUser[]>([]);
   const [isSearching, setIsSearching] = useState(false);
   const [isAdding, setIsAdding] = useState<string | null>(null);
-  const [projectMembers, setProjectMembers] = useState<IProjectMember[]>([]);
+  const [projectMembers, setProjectMembers] = useState<ProjectMember[]>([]);
 
   // Load project members when modal opens
   useEffect(() => {

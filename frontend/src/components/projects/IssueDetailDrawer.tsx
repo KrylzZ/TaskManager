@@ -251,9 +251,6 @@ export default function IssueDetailDrawer({ issueId, onClose, projectId: propPro
     return null;
   }
 
-  const currentColumn = columns.find((c) => c.id === localIssue.columnId);
-  const currentSprint = sprints.find((s) => s.id === localIssue.sprintId);
-
   return (
     <>
       {/* Backdrop */}
@@ -334,7 +331,7 @@ export default function IssueDetailDrawer({ issueId, onClose, projectId: propPro
                 onChange={(e) => setLocalIssue((prev) => (prev ? { ...prev, description: e.target.value } : null))}
                 onBlur={() => {
                   if (localIssue?.description !== selectedIssue?.description) {
-                    handleUpdate({ description: localIssue?.description || null });
+                    handleUpdate({ description: localIssue?.description || undefined });
                   }
                 }}
                 placeholder="Add a description..."
