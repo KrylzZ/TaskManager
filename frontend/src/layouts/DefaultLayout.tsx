@@ -59,7 +59,7 @@ export default function DefaultLayout({ children, title, footerText, maxWidth = 
         <Container maxWidth={maxWidth}>
           <Stack direction={{ xs: "column", sm: "row" }} spacing={2} alignItems="center" justifyContent="space-between">
             <Typography variant="body2" color="text.secondary">
-              {footerText || "© 2025 SEJobs. All rights reserved."}
+              {footerText || "© 2026 TaskManager"}
             </Typography>
             <Typography variant="caption" color="text.disabled" sx={{ fontStyle: "italic" }}>
               Build v1.0.0

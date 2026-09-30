@@ -13,9 +13,6 @@ declare global {
 
 // src/middlewares/auth.middleware.ts
 export const authenticate = (req: Request, res: Response, next: NextFunction) => {
-  console.log("=== AUTH MIDDLEWARE ==="); // Debugging log
-  console.log("Request URL:", req.originalUrl); // Debugging log
-
   try {
     let token: string | undefined;
 
@@ -33,10 +30,7 @@ export const authenticate = (req: Request, res: Response, next: NextFunction) =>
       token = req.cookies.token;
     }
 
-    console.log("Token found:", !!token, "Token value:", token); // Debugging log
-
     if (!token) {
-      console.error("No token provided"); // Debugging log
       throw new UnauthorizedError({
         message: "No token provided",
         status: "NO_TOKEN",
@@ -44,20 +38,15 @@ export const authenticate = (req: Request, res: Response, next: NextFunction) =>
     }
 
     const decoded = verifyToken(token);
-    console.log("Decoded token:", decoded); // Debugging log
 
     if (!decoded.userId) {
-      console.log("ERROR: Token missing user ID");
       throw new UnauthorizedError({
         message: "Token missing user ID",
         status: "INVALID_TOKEN",
       });
     }
 
-    // console.log("userId from token:", decoded.userId, "Type:", typeof decoded.userId);
-
     if (typeof decoded.userId !== "string" || !isValidObjectId(decoded.userId)) {
-      console.log("ERROR: Invalid user ID format");
       throw new UnauthorizedError({
         message: "Invalid user ID format in token",
         status: "INVALID_TOKEN",
@@ -65,7 +54,6 @@ export const authenticate = (req: Request, res: Response, next: NextFunction) =>
     }
 
     req.user = decoded;
-    // console.log("Auth middleware completed successfully");
     next();
   } catch (error) {
     if (error instanceof Error) {
