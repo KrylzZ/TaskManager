@@ -15,10 +15,16 @@ services:
     environment:
       NODE_ENV: development
       PORT: 3000
-      # Add your Supabase environment variables here
-      SUPABASE_URL: ${SUPABASE_URL}
-      SUPABASE_KEY: ${SUPABASE_KEY}
+      # Required variables (see src/config/env.ts)
+      MONGODB_URI: ${MONGODB_URI}
+      MONGODB_DB: ${MONGODB_DB:-TaskManager}
       JWT_SECRET: ${JWT_SECRET}
+      SMTP_HOST: ${SMTP_HOST}
+      SMTP_PORT: ${SMTP_PORT}
+      SMTP_USER: ${SMTP_USER}
+      SMTP_PASS: ${SMTP_PASS}
+      FROM_EMAIL: ${FROM_EMAIL}
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:5173}
     command: npm run dev
     restart: unless-stopped
     healthcheck:
